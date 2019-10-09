@@ -24,11 +24,11 @@ public class Rol implements Serializable {
 	private Long id_rol;
 	
 	@NotEmpty(message="Nombre de rol es requerido")
-	@Column(nullable=false, unique = true)
+	@Column(nullable=false, unique = true, length=100)
 	private String rol;
 	
 	@NotEmpty(message="Descripción es requerido")
-	@Column(nullable=false)
+	@Column(nullable=false, length=300)
 	private String descripcion;
 	
 	@Column

@@ -24,11 +24,11 @@ public class Proyecto implements Serializable {
 	private Long id_proyecto;
 	
 	@NotEmpty(message="Nombre es requerido")
-	@Column(nullable=false)
+	@Column(nullable=false, length=300)
 	private String nombre;
 	
 	@NotEmpty(message="Descripción requerida")
-	@Column(nullable=false)
+	@Column(nullable=false, length=500)
 	private String descripcion;
 	
 	@Column

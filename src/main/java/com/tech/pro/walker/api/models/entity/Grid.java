@@ -49,7 +49,7 @@ public class Grid implements Serializable{
 	@Column(nullable=false, unique = true)
 	private String numero_plano;
 	
-	@Column(length=255)
+	@Column(length=300)
 	private String comentarios;
 	
 	@Column

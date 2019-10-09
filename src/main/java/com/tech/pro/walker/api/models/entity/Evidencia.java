@@ -23,10 +23,10 @@ public class Evidencia implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id_evidencia;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, length=300)
 	private String nombre;
 	
-	@Column(nullable=false, length=300)
+	@Column(nullable=false, length=500)
 	private String descripcion;
 	
 	@NotEmpty(message="Archivo es requerido")

@@ -38,7 +38,7 @@ public class IP  implements Serializable {
 	private boolean sp;
 	
 	@NotEmpty(message="Ubicación requerida")
-	@Column(nullable=false)
+	@Column(nullable=false, length=300)
 	private String ubicacion;
 	
 	@Column

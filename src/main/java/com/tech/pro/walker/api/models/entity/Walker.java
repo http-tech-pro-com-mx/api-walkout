@@ -24,17 +24,17 @@ public class Walker implements Serializable {
 	private Long id_walker;
 	
 	@NotEmpty(message="Nombre es requerido")
-	@Column(nullable=false)
+	@Column(nullable=false, length=255)
 	private String nombre;
 	
 	@NotEmpty(message="Apellido es requerido")
-	@Column(nullable=false)
+	@Column(nullable=false, length=255)
 	private String apellido_paterno;
 	
-	@Column
+	@Column(length=255)
 	private String apellido_materno;
 	
-	@Column
+	@Column(length=255)
 	private String telefono;
 	
 	@NotEmpty(message="Usuario es requerido")
