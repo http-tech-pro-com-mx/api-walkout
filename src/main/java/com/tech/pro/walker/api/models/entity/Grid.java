@@ -1,14 +1,24 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -60,7 +70,21 @@ public class Grid implements Serializable{
 	
 	@Column
 	private boolean estatus;
-
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name =  "id_ip")
+	private IP ip;
+	
+	@OneToMany(mappedBy="grid" , cascade = CascadeType.ALL)
+	private List<Evidencia> evidencias = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name="Asignacion", joinColumns = @JoinColumn(name="id_grid")
+	, inverseJoinColumns = @JoinColumn(name ="id_walker")
+	, uniqueConstraints = {@UniqueConstraint(columnNames= {"id_grid","id_walker"})})
+	private List<Walker> walkers;
+	
+	
 	public Long getId_grid() {
 		return id_grid;
 	}
@@ -164,5 +188,35 @@ public class Grid implements Serializable{
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
 	}
+
+	public IP getIp() {
+		return ip;
+	}
+
+	public void setIp(IP ip) {
+		this.ip = ip;
+	}
+
+	public List<Evidencia> getEvidencias() {
+		return evidencias;
+	}
+
+	public void setEvidencias(List<Evidencia> evidencias) {
+		this.evidencias = evidencias;
+	}
+
+	public List<Walker> getWalkers() {
+		return walkers;
+	}
+
+	public void setWalkers(List<Walker> walkers) {
+		this.walkers = walkers;
+	}
+	
+	
+	
+	
+	
+	
 	
 }

@@ -1,14 +1,22 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "Proyectos")
@@ -33,6 +41,19 @@ public class Proyecto implements Serializable {
 	
 	@Column
 	private boolean estatus;
+	
+	@OneToMany(mappedBy= "proyecto" , cascade = CascadeType.ALL)
+	private List<IP> ips = new ArrayList<>();
+	
+	
+	@ManyToMany( cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinTable(
+			name = "proyecto_walkers",
+			joinColumns = @JoinColumn(name = "id_proyecto", nullable = false),
+					 inverseJoinColumns = @JoinColumn(name="id_walker", nullable = false)
+	)
+	private List<Walker> walkers; 
+	
 
 
 	public Long getId_proyecto() {
@@ -66,6 +87,27 @@ public class Proyecto implements Serializable {
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
 	}
+
+	public List<IP> getIps() {
+		return ips;
+	}
+
+	public void setIps(List<IP> ips) {
+		this.ips = ips;
+	}
+
+	public List<Walker> getWalkers() {
+		return walkers;
+	}
+
+	public void setWalkers(List<Walker> walkers) {
+		this.walkers = walkers;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

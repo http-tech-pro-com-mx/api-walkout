@@ -1,14 +1,26 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.UniqueConstraint;
+
 
 @Entity
 @Table(name = "Walkers")
@@ -48,6 +60,22 @@ public class Walker implements Serializable {
 	@Column
 	private boolean estatus;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name="Walkers_roles", joinColumns = @JoinColumn(name="id_walker")
+	, inverseJoinColumns = @JoinColumn(name ="id_rol")
+	, uniqueConstraints = {@UniqueConstraint(columnNames= {"id_walker","id_rol"})})
+	private List<Rol> roles;
+	
+	
+	@ManyToMany(mappedBy="walkers")
+	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JsonBackReference
+	private List<Proyecto> proyectos; 
+	
+	@ManyToMany(mappedBy="walkers")
+	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JsonBackReference
+	private List<Grid> grids;
 	
 	public Long getId_walker() {
 		return id_walker;
@@ -97,6 +125,25 @@ public class Walker implements Serializable {
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
 	}
+	public List<Rol> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}
+	public List<Proyecto> getProyectos() {
+		return proyectos;
+	}
+	public void setProyectos(List<Proyecto> proyectos) {
+		this.proyectos = proyectos;
+	}
+	public List<Grid> getGrids() {
+		return grids;
+	}
+	public void setGrids(List<Grid> grids) {
+		this.grids = grids;
+	}
+	
 	
 	
 	

@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -35,6 +38,10 @@ public class Evidencia implements Serializable {
 	
 	@Column
 	private boolean estatus;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name =  "id_grid")
+	private Grid grid;
 
 	public Long getId_evidencia() {
 		return id_evidencia;
@@ -67,6 +74,23 @@ public class Evidencia implements Serializable {
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
 	}
+
+	public String getArchivo() {
+		return archivo;
+	}
+
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
+	}
+
+	public Grid getGrid() {
+		return grid;
+	}
+
+	public void setGrid(Grid grid) {
+		this.grid = grid;
+	}
+	
 	
 	
 	

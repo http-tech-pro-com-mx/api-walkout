@@ -1,13 +1,20 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -55,6 +62,13 @@ public class IP  implements Serializable {
 	
 	@Column
 	private Long usuario_update;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name =  "id_proyecto")
+	private Proyecto proyecto;
+	
+	@OneToMany(mappedBy= "ip" , cascade = CascadeType.ALL)
+	private List<Grid> grids = new ArrayList<>();
 	
 	public Long getId_ip() {
 		return id_ip;
@@ -122,6 +136,19 @@ public class IP  implements Serializable {
 	public void setUsuario_update(Long usuario_update) {
 		this.usuario_update = usuario_update;
 	}
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
+	public List<Grid> getGrids() {
+		return grids;
+	}
+	public void setGrids(List<Grid> grids) {
+		this.grids = grids;
+	}
+	
 	
 	
 	
