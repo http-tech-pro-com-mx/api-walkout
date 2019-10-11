@@ -15,9 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.UniqueConstraint;
 
@@ -67,14 +64,10 @@ public class Walker implements Serializable {
 	private List<Rol> roles;
 	
 	
-	@ManyToMany(mappedBy="walkers")
-	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-	@JsonBackReference
+	@ManyToMany(mappedBy="walkers_proyecto")
 	private List<Proyecto> proyectos; 
 	
 	@ManyToMany(mappedBy="walkers")
-	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-	@JsonBackReference
 	private List<Grid> grids;
 	
 	public Long getId_walker() {

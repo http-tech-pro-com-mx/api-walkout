@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Evidencias")
 public class Evidencia implements Serializable {
@@ -41,6 +43,7 @@ public class Evidencia implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name =  "id_grid")
+	@JsonBackReference(value="evidenciaGrid")
 	private Grid grid;
 
 	public Long getId_evidencia() {

@@ -1,6 +1,7 @@
 package com.tech.pro.walker.api.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,24 @@ public class IProyectoServiceImp implements IProyectoService{
 	@Transactional(readOnly = true)
 	public List<Proyecto> findAll() {
 		return iProyectoDao.findAll();
+	}
+
+	@Override
+	@Transactional
+	public Proyecto save(Proyecto proyecto) {
+		return iProyectoDao.save(proyecto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Proyecto> findById(Long id_proyecto) {
+		return iProyectoDao.findById(id_proyecto);
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id_proyecto) {
+		 iProyectoDao.deleteById(id_proyecto);
 	}
 
 }

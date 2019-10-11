@@ -21,6 +21,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Grids")
 public class Grid implements Serializable{
@@ -73,9 +76,11 @@ public class Grid implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name =  "id_ip")
+	@JsonBackReference(value="ipGrid")
 	private IP ip;
 	
 	@OneToMany(mappedBy="grid" , cascade = CascadeType.ALL)
+	@JsonManagedReference(value="evidenciaGrid")
 	private List<Evidencia> evidencias = new ArrayList<>();
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

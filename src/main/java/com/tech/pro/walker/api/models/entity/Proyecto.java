@@ -1,7 +1,6 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,6 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -42,8 +45,9 @@ public class Proyecto implements Serializable {
 	@Column
 	private boolean estatus;
 	
-	@OneToMany(mappedBy= "proyecto" , cascade = CascadeType.ALL)
-	private List<IP> ips = new ArrayList<>();
+	@OneToMany(mappedBy= "proyecto" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference("proyectoIp")
+	private List<IP> ips;
 	
 	
 	@ManyToMany( cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
@@ -52,7 +56,7 @@ public class Proyecto implements Serializable {
 			joinColumns = @JoinColumn(name = "id_proyecto", nullable = false),
 					 inverseJoinColumns = @JoinColumn(name="id_walker", nullable = false)
 	)
-	private List<Walker> walkers; 
+	private List<Walker> walkers_proyecto; 
 	
 
 
@@ -96,20 +100,14 @@ public class Proyecto implements Serializable {
 		this.ips = ips;
 	}
 
-	public List<Walker> getWalkers() {
-		return walkers;
+	public List<Walker> getWalkers_proyecto() {
+		return walkers_proyecto;
 	}
 
-	public void setWalkers(List<Walker> walkers) {
-		this.walkers = walkers;
+	public void setWalkers_proyecto(List<Walker> walkers_proyecto) {
+		this.walkers_proyecto = walkers_proyecto;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 
 }
