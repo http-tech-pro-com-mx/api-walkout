@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +30,7 @@ public class ProyectoController {
 	
 	@PostMapping("/crear-proyecto")
 	public Proyecto save(@RequestBody Proyecto proyecto ) {
-		//return iProyectoServiceImp.save(proyecto);
-		return proyecto;
+		return iProyectoServiceImp.save(proyecto);
 	}
 	
 	@GetMapping("/get-proyecto/{id_proyecto}")
@@ -41,6 +41,11 @@ public class ProyectoController {
 	@DeleteMapping("/delete-proyecto/{id_proyecto}")
 	public void delete(@PathVariable Long id_proyecto) {
 		iProyectoServiceImp.deleteById(id_proyecto);
+	}
+	
+	@PutMapping("/update-proyecto")
+	public Proyecto update(@RequestBody Proyecto proyecto) {
+		return iProyectoServiceImp.save(proyecto);
 	}
 
 }
