@@ -39,12 +39,12 @@ public class WalkerController {
 		return iWalkerServiceImp.findById(id_walker);
 	}
 	
-	@DeleteMapping("/delete-walker/id_walker")
+	@DeleteMapping("/delete-walker/{id_walker}")
 	public void delete(@PathVariable Long id_walker) {
 		iWalkerServiceImp.deleteById(id_walker);
 	}
 	
-	@PutMapping("/update-wlaker")
+	@PutMapping("/update-walker")
 	public Walker update(@RequestBody Walker walker) {
 		return iWalkerServiceImp.save(walker);
 	}

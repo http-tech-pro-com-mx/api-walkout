@@ -64,7 +64,7 @@ public class Walker implements Serializable {
 	private List<Rol> roles;
 	
 	
-	@ManyToMany(mappedBy="walkers_proyecto")
+	@ManyToMany(mappedBy="walkers_proyecto", cascade = CascadeType.ALL)
 	private List<Proyecto> proyectos; 
 	
 	@ManyToMany(mappedBy="walkers")
