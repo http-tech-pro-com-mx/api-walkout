@@ -15,6 +15,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.UniqueConstraint;
 
@@ -64,7 +67,8 @@ public class Walker implements Serializable {
 	private List<Rol> roles;
 	
 	
-	@ManyToMany(mappedBy="walkers_proyecto", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy="walkers_proyecto", fetch= FetchType.LAZY)
+	@JsonIgnore
 	private List<Proyecto> proyectos; 
 	
 	@ManyToMany(mappedBy="walkers")

@@ -50,13 +50,14 @@ public class Proyecto implements Serializable {
 	private List<IP> ips;
 	
 	
-	@ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "proyecto_walkers",
 			joinColumns = @JoinColumn(name = "id_proyecto", nullable = false),
-					 inverseJoinColumns = @JoinColumn(name="id_walker", nullable = false)
+					 inverseJoinColumns = @JoinColumn(name="id_walker", nullable = true)
 	)
 	@JsonIgnore
+	@JsonManagedReference
 	private List<Walker> walkers_proyecto; 
 	
 
