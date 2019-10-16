@@ -71,7 +71,8 @@ public class Walker implements Serializable {
 	@JsonIgnore
 	private List<Proyecto> proyectos; 
 	
-	@ManyToMany(mappedBy="walkers")
+	@ManyToMany(mappedBy="walkers", fetch= FetchType.LAZY)
+	@JsonIgnore
 	private List<Grid> grids;
 	
 	public Long getId_walker() {

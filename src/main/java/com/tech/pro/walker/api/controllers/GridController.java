@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +19,14 @@ public class GridController {
 	@Autowired
 	private IGridServiceImp iGridServiceImp;
 	
-	@GetMapping("/getGrids")
+	@GetMapping("/get-Grids")
 	public List<Grid> index(){
 		return iGridServiceImp.findAll();
 	} 
+	
+	@PostMapping("/crear-grid")
+	public Grid crear(@RequestBody Grid grid) {
+		return iGridServiceImp.save(grid);
+	}
 
 }

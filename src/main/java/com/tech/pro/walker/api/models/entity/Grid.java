@@ -1,11 +1,9 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,9 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -58,7 +57,7 @@ public class Grid implements Serializable{
 	@Column
 	private int total_baldios;
 	
-	@NotEmpty(message="Numero de plano es requerido")
+	@NotNull(message="Numero de plano es requerido")
 	@Column(nullable=false, unique = true)
 	private String numero_plano;
 	
@@ -79,14 +78,16 @@ public class Grid implements Serializable{
 	@JsonBackReference(value="ipGrid")
 	private IP ip;
 	
-	@OneToMany(mappedBy="grid" , cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="grid")
 	@JsonManagedReference(value="evidenciaGrid")
-	private List<Evidencia> evidencias = new ArrayList<>();
+	private List<Evidencia> evidencias;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="Asignacion", joinColumns = @JoinColumn(name="id_grid")
 	, inverseJoinColumns = @JoinColumn(name ="id_walker")
 	, uniqueConstraints = {@UniqueConstraint(columnNames= {"id_grid","id_walker"})})
+	@JsonIgnore
+	@JsonManagedReference
 	private List<Walker> walkers;
 	
 	
