@@ -15,5 +15,7 @@ public interface IWalkerService {
 	public  Optional<Walker>  findById(Long id_walker);
 	
 	public void deleteById(Long id_walker);
+	
+	public Walker findByUsuario(String username);
 
 }
