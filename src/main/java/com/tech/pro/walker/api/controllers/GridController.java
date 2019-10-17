@@ -24,7 +24,7 @@ public class GridController {
 		return iGridServiceImp.findAll();
 	} 
 	
-	@PostMapping("/crear-grid")
+	@PostMapping("/crear-Grid")
 	public Grid crear(@RequestBody Grid grid) {
 		return iGridServiceImp.save(grid);
 	}

@@ -3,7 +3,7 @@ package com.tech.pro.walker.api.models.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.UniqueConstraint;
@@ -60,10 +61,12 @@ public class Walker implements Serializable {
 	@Column
 	private boolean estatus;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="Walkers_roles", joinColumns = @JoinColumn(name="id_walker")
 	, inverseJoinColumns = @JoinColumn(name ="id_rol")
 	, uniqueConstraints = {@UniqueConstraint(columnNames= {"id_walker","id_rol"})})
+	@JsonIgnore
+	@JsonManagedReference("rol_ref")
 	private List<Rol> roles;
 	
 	

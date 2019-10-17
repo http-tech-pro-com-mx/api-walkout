@@ -1,14 +1,20 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Roles")
@@ -33,6 +39,11 @@ public class Rol implements Serializable {
 	
 	@Column
 	private boolean estatus;
+	
+	@ManyToMany(mappedBy="roles" ,fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JsonBackReference("rol_ref")
+	private List<Walker> walker;
 
 	public Long getId_rol() {
 		return id_rol;
@@ -65,6 +76,18 @@ public class Rol implements Serializable {
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
 	}
+
+	public List<Walker> getWalker() {
+		return walker;
+	}
+
+	public void setWalker(List<Walker> walker) {
+		this.walker = walker;
+	}
+
+	
+	
+	
 	
 	
 

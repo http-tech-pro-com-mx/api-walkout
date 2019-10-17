@@ -17,7 +17,7 @@ public class RolController {
 	@Autowired
 	private IRolServiceImp iRolServiceImp;
 	
-	@GetMapping("/getRoles")
+	@GetMapping("/get-Roles")
 	public List<Rol> index(){
 		return iRolServiceImp.findAll();
 	}

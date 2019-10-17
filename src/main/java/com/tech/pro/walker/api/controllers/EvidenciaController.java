@@ -17,7 +17,7 @@ public class EvidenciaController {
 	@Autowired
 	private IEvidenciaServiceImp iEvidenciaServiceImp;
 	
-	@GetMapping("/getEvidencia")
+	@GetMapping("/get-Evidencias")
 	public List<Evidencia> index(){
 		return iEvidenciaServiceImp.findAll();
 	}
