@@ -61,12 +61,12 @@ public class Walker implements Serializable {
 	@Column
 	private boolean estatus;
 	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="Walkers_roles", joinColumns = @JoinColumn(name="id_walker")
 	, inverseJoinColumns = @JoinColumn(name ="id_rol")
 	, uniqueConstraints = {@UniqueConstraint(columnNames= {"id_walker","id_rol"})})
-	@JsonIgnore
-	@JsonManagedReference("rol_ref")
+	@JsonManagedReference
 	private List<Rol> roles;
 	
 	
