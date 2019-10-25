@@ -48,6 +48,11 @@ public class IpController {
 		return iIpServiceImp.save(IP);
 	}
 	
+	@GetMapping("/get-IPS/proyecto/{id_proyecto}")
+	public List<IP> getIpsProyecto(@PathVariable Long id_proyecto){
+		return iIpServiceImp.findAllWhereIdProyecto(id_proyecto);
+	}
+	
 	
 	
 

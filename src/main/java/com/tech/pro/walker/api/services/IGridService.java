@@ -9,5 +9,7 @@ public interface IGridService {
 	public List<Grid> findAll();
 	
 	public Grid save(Grid grid);
+	
+	public List<Grid> findAllGridByIp(Long id_ip);
 
 }

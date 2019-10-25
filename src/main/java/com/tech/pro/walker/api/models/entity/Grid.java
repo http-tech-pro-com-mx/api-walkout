@@ -1,7 +1,6 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,9 +36,6 @@ public class Grid implements Serializable{
 	private Long id_grid;
 	
 	@Column
-	private Date fecha;
-	
-	@Column
 	private Double total_pies;
 	
 	@Column
@@ -64,8 +60,6 @@ public class Grid implements Serializable{
 	@Column(length=300)
 	private String comentarios;
 	
-	@Column
-	private int tipo;
 	
 	@Column
 	private String archivo;
@@ -99,13 +93,6 @@ public class Grid implements Serializable{
 		this.id_grid = id_grid;
 	}
 
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
 
 	public Double getTotal_pies() {
 		return total_pies;
@@ -169,14 +156,6 @@ public class Grid implements Serializable{
 
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
-	}
-
-	public int getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getArchivo() {

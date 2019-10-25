@@ -39,6 +39,14 @@ public class IIpServiceImp implements IIpService{
 	public void deleteById(Long id_IP) {
 		iIpDao.deleteById(id_IP);
 	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public List<IP> findAllWhereIdProyecto(Long id_proyecto) {
+		return iIpDao.findAllWhereIdProyecto(id_proyecto);
+	}
+	
+	
 	
 	
 

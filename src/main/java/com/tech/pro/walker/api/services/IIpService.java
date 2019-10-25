@@ -16,4 +16,6 @@ public interface IIpService {
 	
 	public void deleteById(Long id_IP);
 	
+	public List<IP> findAllWhereIdProyecto(Long id_proyecto);
+	
 }

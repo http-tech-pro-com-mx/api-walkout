@@ -59,6 +59,27 @@ public class Walker implements Serializable {
 	private String pwd;
 	
 	@Column
+	private String compania;
+	
+	@Column
+	private String email;
+	
+	@Column
+	private String direccion;
+	
+	@Column
+	private String pais;
+	
+	@Column
+	private String ciudad;
+	
+	@Column
+	private Long codigo_postal;
+	
+	@Column
+	private String sobre_mi;
+	
+	@Column
 	private boolean estatus;
 	
 	@JsonIgnore
@@ -144,10 +165,48 @@ public class Walker implements Serializable {
 	public void setGrids(List<Grid> grids) {
 		this.grids = grids;
 	}
-	
-	
-	
-	
+	public String getCompania() {
+		return compania;
+	}
+	public void setCompania(String compania) {
+		this.compania = compania;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public String getPais() {
+		return pais;
+	}
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+	public String getCiudad() {
+		return ciudad;
+	}
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+	public Long getCodigo_postal() {
+		return codigo_postal;
+	}
+	public void setCodigo_postal(Long codigo_postal) {
+		this.codigo_postal = codigo_postal;
+	}
+	public String getSobre_mi() {
+		return sobre_mi;
+	}
+	public void setSobre_mi(String sobre_mi) {
+		this.sobre_mi = sobre_mi;
+	}
 	
 
 }

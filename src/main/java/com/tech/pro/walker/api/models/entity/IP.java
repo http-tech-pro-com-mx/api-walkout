@@ -47,6 +47,12 @@ public class IP  implements Serializable {
 	@Column
 	private boolean sp;
 	
+	@Column
+	private Date fecha_levantamiento;
+	
+	@Column
+	private int tipo;
+	
 	@NotEmpty(message="Ubicación requerida")
 	@Column(nullable=false, length=300)
 	private String ubicacion;
@@ -153,6 +159,20 @@ public class IP  implements Serializable {
 	public void setGrids(List<Grid> grids) {
 		this.grids = grids;
 	}
+	public Date getFecha_levantamiento() {
+		return fecha_levantamiento;
+	}
+	public void setFecha_levantamiento(Date fecha_levantamiento) {
+		this.fecha_levantamiento = fecha_levantamiento;
+	}
+	public int getTipo() {
+		return tipo;
+	}
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+	
+	
 	
 	
 	
