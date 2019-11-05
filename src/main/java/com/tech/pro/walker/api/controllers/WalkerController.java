@@ -48,5 +48,10 @@ public class WalkerController {
 	public Walker update(@RequestBody Walker walker) {
 		return iWalkerServiceImp.save(walker);
 	}
+	
+	@GetMapping("/get-walker-by-rol/{id_rol}")
+	public Optional<Walker> getWalkerByRol(@PathVariable Long id_rol){
+		return iWalkerServiceImp.findById(id_rol);
+	}
 
 }

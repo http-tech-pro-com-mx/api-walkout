@@ -34,8 +34,28 @@ public class GridController {
 	} 
 	
 	@PostMapping("/crear-Grid")
-	public Grid crear(@RequestBody Grid grid) {
-		return iGridServiceImp.save(grid);
+	public ResponseEntity<?> crear(@RequestBody Grid grid) {
+		
+		Map<String, Object> response = new HashMap<>();	
+		int reg = iGridServiceImp.findByGrid(grid.getNumero_plano().trim(), grid.getIp().getId_ip());
+		boolean b = true;
+		String menssage = "";
+		
+		if( reg == 0) {
+			
+			response.put("grid", iGridServiceImp.save(grid));
+			menssage = "Registro exitoso!";
+			
+		}else {
+			b= false;
+			menssage = "Número de plano ya fue registrado";
+		}
+		
+		
+		response.put("successful", b);
+		response.put("message", menssage);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		
 	}
 	
 	@GetMapping("get-Grids/{id_ip}")
@@ -43,16 +63,59 @@ public class GridController {
 		return iGridServiceImp.findAllGridByIp(id_ip);
 	}
 	
+	@GetMapping("get-Grid/{id_grid}")
+	public Grid findGridByIdGrid(@PathVariable("id_grid") Long id_grid){
+		return iGridServiceImp.fingGridById(id_grid);
+	}
+	
 	@GetMapping("/get-Grids/{id_ip}/All-walkers")
 	public ResponseEntity<?> getGridsAllWalker(@PathVariable Long id_ip) {
 
 		Map<String, Object> response = new HashMap<>();
-		response.put("walkers", iWalkerServiceImp.findAll());
+		response.put("walkers", iWalkerServiceImp.findAllWalkersByRol(1L));
 		response.put("grids", iGridServiceImp.findAllGridByIp(id_ip));
 		response.put("successful", true);
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
-
+	}
+	
+	@PostMapping("/update-Grid")
+	public ResponseEntity<?> update(@RequestBody Grid grid) {
+		
+		Map<String, Object> response = new HashMap<>();	
+		
+		Grid reg = iGridServiceImp.findGridByIdGrid(grid.getNumero_plano().trim(), grid.getIp().getId_ip());
+		
+		boolean b = true;
+		String menssage = "";
+		
+		if( reg == null) {
+			
+			response.put("grid", iGridServiceImp.save(grid));
+			menssage = "Actualización exitosa!";
+			
+		}else {
+			
+		
+			
+			if( reg.getId_grid() == grid.getId_grid()) {
+				
+				response.put("grid", iGridServiceImp.save(grid));
+				menssage = "Actualización exitosa!";
+				
+			}else {
+				
+				b= false;
+				menssage = "Número de plano ya fue registrado";
+			}
+			
+		}
+		
+		
+		response.put("successful", b);
+		response.put("message", menssage);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		
 	}
 	
 	

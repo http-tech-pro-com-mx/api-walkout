@@ -17,5 +17,7 @@ public interface IWalkerService {
 	public void deleteById(Long id_walker);
 	
 	public Walker findByUsuario(String username);
+	
+	public List<Walker> findAllWalkersByRol(Long id_rol);
 
 }

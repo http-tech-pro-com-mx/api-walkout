@@ -41,4 +41,8 @@ public class IProyectoServiceImp implements IProyectoService{
 		 iProyectoDao.deleteById(id_proyecto);
 	}
 
+
+
+
+
 }

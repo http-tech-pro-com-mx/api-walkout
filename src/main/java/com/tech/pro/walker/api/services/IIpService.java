@@ -18,4 +18,10 @@ public interface IIpService {
 	
 	public List<IP> findAllWhereIdProyecto(Long id_proyecto);
 	
+	public int findByIp(String ip);
+	
+	public Long getIdIpByIP(String ip);
+	
+	public Long  getIdProyecto(Long id_ip); 
+	
 }

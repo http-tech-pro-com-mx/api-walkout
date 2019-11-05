@@ -32,6 +32,30 @@ public class IGridServiceImp implements IGridService {
 	public List<Grid> findAllGridByIp(Long id_ip) {
 		return iGridDao.findAllGridByIp(id_ip);
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public int findByGrid(String numero_plano, Long id_ip) {
+		return iGridDao.findByGrid(numero_plano, id_ip);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Grid findGridByIdGrid(String numero_plano, Long id_ip) {
+		return iGridDao.findGridByIdGrid(numero_plano, id_ip);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Grid fingGridById(Long id_grid) {	
+		return iGridDao.fingGridById(id_grid);
+	}
+
+
+	
+
+	
+	
 	
 	
 	

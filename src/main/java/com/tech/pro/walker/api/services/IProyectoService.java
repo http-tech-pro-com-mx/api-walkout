@@ -15,5 +15,4 @@ public interface IProyectoService {
 	
 	public void deleteById(Long proyecto);
 	
-
 }

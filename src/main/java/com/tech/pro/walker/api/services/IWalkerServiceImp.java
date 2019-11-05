@@ -66,6 +66,12 @@ public class IWalkerServiceImp implements IWalkerService, UserDetailsService {
 	public Walker findByUsuario(String username) {
 		return iWalkerDao.findByUsuario(username);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Walker> findAllWalkersByRol(Long id_rol) {
+		return iWalkerDao.findAllWalkersByRol(id_rol);
+	}
 	
 	
 	

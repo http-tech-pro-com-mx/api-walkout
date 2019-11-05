@@ -45,6 +45,26 @@ public class IIpServiceImp implements IIpService{
 	public List<IP> findAllWhereIdProyecto(Long id_proyecto) {
 		return iIpDao.findAllWhereIdProyecto(id_proyecto);
 	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public int findByIp(String ip) {
+		return iIpDao.findByIp(ip);
+	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public Long getIdIpByIP(String ip) {
+		return iIpDao.getIdIpByIP(ip);
+	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public Long getIdProyecto(Long id_ip) {
+		return iIpDao.getIdProyecto(id_ip);
+	}
+	
+	
 	
 	
 	

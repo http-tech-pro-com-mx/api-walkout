@@ -54,7 +54,7 @@ public class Grid implements Serializable{
 	private int total_baldios;
 	
 	@NotNull(message="Numero de plano es requerido")
-	@Column(nullable=false, unique = true)
+	@Column(nullable=false)
 	private String numero_plano;
 	
 	@Column(length=300)

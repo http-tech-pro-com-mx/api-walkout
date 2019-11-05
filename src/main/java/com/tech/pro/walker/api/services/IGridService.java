@@ -11,5 +11,13 @@ public interface IGridService {
 	public Grid save(Grid grid);
 	
 	public List<Grid> findAllGridByIp(Long id_ip);
+	
+	public Grid findGridByIdGrid(String numero_plano, Long id_ip);
+	
+	public int findByGrid(String numero_plano, Long id_ip);
+	
+	public Grid fingGridById(Long id_grid);
+	
+	
 
 }
