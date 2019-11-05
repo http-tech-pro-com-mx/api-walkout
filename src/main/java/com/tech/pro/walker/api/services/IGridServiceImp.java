@@ -51,6 +51,12 @@ public class IGridServiceImp implements IGridService {
 		return iGridDao.fingGridById(id_grid);
 	}
 
+	@Override
+	@Transactional
+	public void deleteById(Long id_grid) {
+		iGridDao.deleteById(id_grid);
+	}
+
 
 	
 

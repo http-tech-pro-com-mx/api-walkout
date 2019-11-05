@@ -18,6 +18,8 @@ public interface IGridService {
 	
 	public Grid fingGridById(Long id_grid);
 	
+	public void deleteById(Long id_grid);
+	
 	
 
 }

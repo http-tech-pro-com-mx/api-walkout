@@ -18,6 +18,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -77,6 +80,7 @@ public class Grid implements Serializable{
 	private List<Evidencia> evidencias;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(name="Asignacion", joinColumns = @JoinColumn(name="id_grid")
 	, inverseJoinColumns = @JoinColumn(name ="id_walker")
 	, uniqueConstraints = {@UniqueConstraint(columnNames= {"id_grid","id_walker"})})
