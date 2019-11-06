@@ -60,6 +60,11 @@ public class Proyecto implements Serializable {
 	@JsonManagedReference
 	private List<Walker> walkers_proyecto; 
 	
+	
+	@OneToMany(mappedBy = "proyecto")
+	@JsonManagedReference("configProyecto")
+	private List<Configuracion> configuraciones;
+	
 
 
 	public Long getId_proyecto() {
@@ -109,6 +114,16 @@ public class Proyecto implements Serializable {
 	public void setWalkers_proyecto(List<Walker> walkers_proyecto) {
 		this.walkers_proyecto = walkers_proyecto;
 	}
+
+	public List<Configuracion> getConfiguraciones() {
+		return configuraciones;
+	}
+
+	public void setConfiguraciones(List<Configuracion> configuraciones) {
+		this.configuraciones = configuraciones;
+	}
+	
+	
 
 
 
