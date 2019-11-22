@@ -10,7 +10,7 @@ import com.tech.pro.walker.api.models.entity.Configuracion;
 public interface IConfiguracionDao extends JpaRepository<Configuracion, Long>{
 	
 	
-	@Query("from Configuracion c where proyecto.id_proyecto =?1")
+	@Query("from Configuracion c where proyecto.id_proyecto =?1 and c.estatus = 1")
 	public List<Configuracion> findAllByIdProyecto(Long id_proyecto);
 
 }

@@ -1,5 +1,6 @@
 package com.tech.pro.walker.api.services;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,29 @@ public class IGridServiceImp implements IGridService {
 		iGridDao.deleteById(id_grid);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Object> rptGlobalProyecto(Long id_proyecto) {
+		return iGridDao.rptGlobalProyecto(id_proyecto);
+	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Object> rptGlobalProyectoByDay(String date, Long id_proyecto) {
+		return iGridDao.rptGlobalProyectoByDay(date, id_proyecto);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Object> rptGlobalProyectoSemanal(String fecha_incio, String fecha_final, Long id_proyecto) {		
+		return iGridDao.rptGlobalProyectoSemanal(fecha_incio, fecha_final, id_proyecto);
+	}
+	
+	
+	
+	
+
+	
 	
 
 	

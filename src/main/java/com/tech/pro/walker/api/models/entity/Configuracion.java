@@ -1,7 +1,9 @@
 package com.tech.pro.walker.api.models.entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -35,9 +39,11 @@ public class Configuracion implements Serializable  {
 	private String descripcion;
 	
 	@Column
+	@Temporal(TemporalType.DATE)
 	private Date fecha_inicio;
 	
 	@Column
+	@Temporal(TemporalType.DATE)
 	private Date fecha_fin;
 	
 	@Column(nullable=false)
@@ -77,7 +83,7 @@ public class Configuracion implements Serializable  {
 	}
 
 	public Date getFecha_inicio() {
-		return fecha_inicio;
+		return getDateCorrecta(fecha_inicio, 1);
 	}
 
 	public void setFecha_inicio(Date fecha_inicio) {
@@ -85,7 +91,7 @@ public class Configuracion implements Serializable  {
 	}
 
 	public Date getFecha_fin() {
-		return fecha_fin;
+		return getDateCorrecta(fecha_fin, 1);
 	}
 
 	public void setFecha_fin(Date fecha_fin) {
@@ -114,6 +120,13 @@ public class Configuracion implements Serializable  {
 
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
+	}
+	
+	private Date getDateCorrecta(Date f, int dias) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(f);
+	    c.add(c.DATE, dias);
+	    return c.getTime();
 	}
 	
 
