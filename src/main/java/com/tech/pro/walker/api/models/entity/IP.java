@@ -39,7 +39,7 @@ public class IP  implements Serializable {
 	private String ip;
 	
 	@Column
-	private Double km;
+	private Double pies;
 	
 	@Column
 	private int QC;
@@ -91,13 +91,13 @@ public class IP  implements Serializable {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public Double getKm() {
-		return km;
+
+	public Double getPies() {
+		return pies;
 	}
-	public void setKm(Double km) {
-		this.km = km;
+	public void setPies(Double pies) {
+		this.pies = pies;
 	}
-	
 	public int getQC() {
 		return QC;
 	}
