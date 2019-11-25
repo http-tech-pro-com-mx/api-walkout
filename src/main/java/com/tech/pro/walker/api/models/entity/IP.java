@@ -42,10 +42,8 @@ public class IP  implements Serializable {
 	private Double km;
 	
 	@Column
-	private boolean QC;
+	private int QC;
 	
-	@Column
-	private boolean sp;
 	
 	@Column
 	private Date fecha_levantamiento;
@@ -99,17 +97,12 @@ public class IP  implements Serializable {
 	public void setKm(Double km) {
 		this.km = km;
 	}
-	public boolean isQC() {
+	
+	public int getQC() {
 		return QC;
 	}
-	public void setQC(boolean qC) {
+	public void setQC(int qC) {
 		QC = qC;
-	}
-	public boolean isSp() {
-		return sp;
-	}
-	public void setSp(boolean sp) {
-		this.sp = sp;
 	}
 	public String getUbicacion() {
 		return ubicacion;
