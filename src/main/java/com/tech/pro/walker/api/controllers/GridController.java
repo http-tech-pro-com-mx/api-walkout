@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +30,13 @@ public class GridController {
 	@Autowired
 	private IWalkerServiceImp iWalkerServiceImp;
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@GetMapping("/get-Grids")
 	public List<Grid> index(){
 		return iGridServiceImp.findAll();
 	} 
 	
+	@Secured({ "ROLE_HQ"})
 	@PostMapping("/crear-Grid")
 	public ResponseEntity<?> crear(@RequestBody Grid grid) {
 		
@@ -59,16 +62,19 @@ public class GridController {
 		
 	}
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@GetMapping("get-Grids/{id_ip}")
 	public List<Grid> gridsByIp(@PathVariable Long id_ip){
 		return iGridServiceImp.findAllGridByIp(id_ip);
 	}
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@GetMapping("get-Grid/{id_grid}")
 	public Grid findGridByIdGrid(@PathVariable("id_grid") Long id_grid){
 		return iGridServiceImp.fingGridById(id_grid);
 	}
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@GetMapping("/get-Grids/{id_ip}/All-walkers")
 	public ResponseEntity<?> getGridsAllWalker(@PathVariable Long id_ip) {
 
@@ -80,6 +86,7 @@ public class GridController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
+	@Secured({ "ROLE_HQ"})
 	@PostMapping("/update-Grid")
 	public ResponseEntity<?> update(@RequestBody Grid grid) {
 		
@@ -119,6 +126,7 @@ public class GridController {
 		
 	}
 	
+	@Secured({ "ROLE_HQ"})
 	@DeleteMapping("/delete-Grid/{id_grid}")
 	public void delete(@PathVariable Long id_grid) {
 		iGridServiceImp.deleteById(id_grid);

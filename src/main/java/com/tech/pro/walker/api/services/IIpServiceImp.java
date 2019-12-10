@@ -63,10 +63,18 @@ public class IIpServiceImp implements IIpService{
 	public Long getIdProyecto(Long id_ip) {
 		return iIpDao.getIdProyecto(id_ip);
 	}
-	
-	
-	
-	
+
+	@Override
+	@Transactional(readOnly= true)
+	public List<Object> getParticipantesByIp(Long id_ip) {
+		return iIpDao.getParticipantesByIp(id_ip);
+	}
+
+	@Override
+	@Transactional
+	public void changeStatus(Long id_ip, int estatus) {
+		iIpDao.changeStatus(id_ip, estatus);
+	}
 	
 	
 

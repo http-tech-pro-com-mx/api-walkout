@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,26 +24,31 @@ public class ProyectoController {
 	@Autowired
 	private IProyectoServiceImp iProyectoServiceImp;
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN", "ROLE_WALKER" })
 	@GetMapping("/get-proyectos")
 	public List<Proyecto> index(){
 		return iProyectoServiceImp.findAll();
 	}
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@PostMapping("/crear-proyecto")
 	public Proyecto save(@RequestBody Proyecto proyecto ) {
 		return iProyectoServiceImp.save(proyecto);
 	}
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@GetMapping("/get-proyecto/{id_proyecto}")
 	public Optional<Proyecto> getProyecto(@PathVariable Long  id_proyecto) {
 		return iProyectoServiceImp.findById(id_proyecto);
 	}
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@DeleteMapping("/delete-proyecto/{id_proyecto}")
 	public void delete(@PathVariable Long id_proyecto) {
 		iProyectoServiceImp.deleteById(id_proyecto);
 	}
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@PutMapping("/update-proyecto")
 	public Proyecto update(@RequestBody Proyecto proyecto) {
 		return iProyectoServiceImp.save(proyecto);

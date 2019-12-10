@@ -1,5 +1,6 @@
 package com.tech.pro.walker.api.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +28,14 @@ public class IpController {
 	@Autowired
 	private IIpServiceImp iIpServiceImp;
 	
+	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN", "ROLE_C_IP" })
 	@GetMapping("/get-IPS")
 	public List<IP> index(){
 		return iIpServiceImp.findAll();
 	}
 	
+	@Secured({ "ROLE_HQ" })
 	@PostMapping("/crear-IP")
 	public ResponseEntity<?>  save(@RequestBody IP IP ) {
 		Map<String, Object> response = new HashMap<>();	
@@ -54,7 +59,7 @@ public class IpController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
-	
+	@Secured({ "ROLE_HQ" })	
 	@PostMapping("/update-IP")
 	public ResponseEntity<?>  update(@RequestBody IP IP ) {
 		Map<String, Object> response = new HashMap<>();	
@@ -90,7 +95,7 @@ public class IpController {
 		
 	}
 	
-	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN", "ROLE_CONSULTA_IP" })
 	@GetMapping("/get-IP/{id_IP}")
 	public ResponseEntity<?> getIP(@PathVariable Long  id_IP) {
 		Map<String, Object> response = new HashMap<>();	
@@ -99,15 +104,53 @@ public class IpController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
+	@Secured({ "ROLE_HQ" })
 	@DeleteMapping("/delete-IP/{id_IP}")
-	public void delete(@PathVariable Long id_IP) {
+	public  ResponseEntity<?>  delete(@PathVariable Long id_IP) {
+		Map<String, Object> response = new HashMap<>();	
 		iIpServiceImp.deleteById(id_IP);
+		response.put("successful", true);
+		response.put("message", " IP eliminada ");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+	
+	@Secured({ "ROLE_HQ" })
+	@PostMapping("/changeStatusIP")
+	public ResponseEntity<?> changeStatus(@RequestBody IP IP){
+		
+		Map<String, Object> response = new HashMap<>();	
+		
+		iIpServiceImp.changeStatus(IP.getId_ip(), IP.getQC());
+		
+		response.put("successful", true);
+		response.put("message", " Se actualizó el estatus");
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		
 	}
 	
 	
+	@Secured({ "ROLE_HQ", "ROLE_ADMIN", "ROLE_CONSULTA_IP"  })
 	@GetMapping("/get-IPS/proyecto/{id_proyecto}")
-	public List<IP> getIpsProyecto(@PathVariable Long id_proyecto){
-		return iIpServiceImp.findAllWhereIdProyecto(id_proyecto);
+	public ResponseEntity<?> getIpsProyecto(@PathVariable Long id_proyecto){
+		Map<String, Object> response = new HashMap<>();	
+		
+		List<IP> ips =  iIpServiceImp.findAllWhereIdProyecto(id_proyecto);
+		List<Object> all = new ArrayList<>();
+		
+		 for(IP ip : ips) {
+			 
+			 List<Object> participantes = new ArrayList<>();
+			 participantes.add(ip.getId_ip());
+			 participantes.add(iIpServiceImp.getParticipantesByIp(ip.getId_ip()));
+			 
+			 all.add(participantes);
+			 
+		 }
+		 
+		response.put("ips",ips);
+		response.put("participantes", all );
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
 	

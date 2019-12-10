@@ -24,4 +24,8 @@ public interface IIpService {
 	
 	public Long  getIdProyecto(Long id_ip); 
 	
+	public List<Object> getParticipantesByIp(Long id_ip);
+	
+	public void changeStatus(Long id_ip, int estatus);
+	
 }
