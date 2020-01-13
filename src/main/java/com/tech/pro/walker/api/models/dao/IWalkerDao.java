@@ -17,5 +17,9 @@ public interface IWalkerDao extends JpaRepository<Walker, Long> {
 	@Modifying
 	@Query(value = "SELECT * FROM walkout.walkers w INNER JOIN walkout.walkers_roles r  ON  r.id_walker = w.id_walker WHERE r.id_rol =?1", nativeQuery = true)
 	public List<Walker> findAllWalkersByRol(Long id_rol);
+	
+	@Modifying
+	@Query("update Walker w set w.pwd =?1 where w.id_walker =?2")
+	public void updateContrasenia(String contrasenia, Long id_usuario);
 
 }

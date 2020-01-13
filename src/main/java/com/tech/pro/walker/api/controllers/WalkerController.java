@@ -1,7 +1,10 @@
 package com.tech.pro.walker.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tech.pro.walker.api.models.entity.Walker;
 import com.tech.pro.walker.api.services.IWalkerServiceImp;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +29,10 @@ public class WalkerController {
 	
 	@Autowired
 	private IWalkerServiceImp iWalkerServiceImp;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	
 	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
 	@GetMapping("/get-walkers")
@@ -59,6 +68,39 @@ public class WalkerController {
 	@GetMapping("/get-walker-by-rol/{id_rol}")
 	public Optional<Walker> getWalkerByRol(@PathVariable Long id_rol){
 		return iWalkerServiceImp.findById(id_rol);
+	}
+	
+	
+	@PostMapping(path = "/changePassword")
+	public ResponseEntity<?> changePassword(@RequestBody Map<String, String> params) {
+		Map<String, Object> response = new HashMap<>();
+		String actual = params.get("actual");
+		String nueva = params.get("nueva");
+		Long id_walker = Long.valueOf(params.get("id_walker"));
+
+		Walker walker = iWalkerServiceImp.findById( id_walker ).orElse(null);
+		
+
+		if (passwordEncoder.matches(actual, walker.getPwd() )) {
+
+			if (passwordEncoder.matches(nueva, walker.getPwd())) {
+				response.put("successful", false);
+				response.put("message", "La contraseña nueva no puede ser igual a la actual");
+			} else {
+
+				String encryp = passwordEncoder.encode(nueva);
+				iWalkerServiceImp.updateContrasenia(encryp, walker.getId_walker());
+				response.put("successful", true);
+				response.put("message", "Contraseña actualizada");
+			}
+
+		} else {
+			response.put("successful", false);
+			response.put("message", "La contraseña actual es incorrecta");
+		}
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
 	}
 
 }

@@ -73,7 +73,12 @@ public class IWalkerServiceImp implements IWalkerService, UserDetailsService {
 		return iWalkerDao.findAllWalkersByRol(id_rol);
 	}
 	
-	
+
+	@Override
+	@Transactional
+	public void updateContrasenia(String contrasenia, Long id_walker) {
+		iWalkerDao.updateContrasenia(contrasenia, id_walker);
+	}
 	
 	
 

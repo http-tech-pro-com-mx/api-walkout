@@ -19,5 +19,7 @@ public interface IWalkerService {
 	public Walker findByUsuario(String username);
 	
 	public List<Walker> findAllWalkersByRol(Long id_rol);
+	
+	public void updateContrasenia(String contrasenia, Long id_walker);
 
 }
