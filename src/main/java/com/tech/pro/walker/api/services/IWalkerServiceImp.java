@@ -79,6 +79,14 @@ public class IWalkerServiceImp implements IWalkerService, UserDetailsService {
 	public void updateContrasenia(String contrasenia, Long id_walker) {
 		iWalkerDao.updateContrasenia(contrasenia, id_walker);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Walker> findByEmail(String email) {
+		return iWalkerDao.findByEmail( email );
+	}
+	
+	
 	
 	
 

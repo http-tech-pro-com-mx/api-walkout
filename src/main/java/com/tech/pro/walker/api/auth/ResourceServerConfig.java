@@ -21,8 +21,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/walkout/**").permitAll().anyRequest()
-				//.antMatchers(HttpMethod.POST, "/api/usuarios/forgot-password-user").permitAll().anyRequest()
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/walkout/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/walkout/forgot-password-user").permitAll().anyRequest()
 				.authenticated().and().cors().configurationSource(corsConfigurationSource());
 	}
 

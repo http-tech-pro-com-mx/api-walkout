@@ -21,5 +21,7 @@ public interface IWalkerService {
 	public List<Walker> findAllWalkersByRol(Long id_rol);
 	
 	public void updateContrasenia(String contrasenia, Long id_walker);
+	
+	public Optional<Walker> findByEmail(String email);
 
 }

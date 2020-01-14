@@ -1,5 +1,6 @@
 package com.tech.pro.walker.api.controllers;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tech.pro.walker.api.models.entity.Walker;
 import com.tech.pro.walker.api.services.IWalkerServiceImp;
+import com.tech.pro.walker.api.services.MailServiceImpl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,9 @@ public class WalkerController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private MailServiceImpl mailServiceImpl;
 	
 	
 	@Secured({ "ROLE_HQ", "ROLE_ADMIN" })
@@ -101,6 +106,50 @@ public class WalkerController {
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
+	}
+	
+	@PostMapping(path = "/forgot-password-user")
+	public ResponseEntity<?> forgotPasswordUser(@RequestBody String params) {
+		Map<String, Object> response = new HashMap<>();
+
+		String correo_electronico = params;
+		Walker existe_user = iWalkerServiceImp.findByEmail(correo_electronico).orElse(null);
+
+		if (existe_user != null) {
+
+			if (existe_user.isEstatus()) {
+				
+				String destinatario = existe_user.getEmail();
+				
+				String nueva_pwd = RandomStringUtils.randomAlphanumeric(10);
+				String encryp = passwordEncoder.encode(nueva_pwd);
+				
+				
+				try {
+					mailServiceImpl.sendEmail(destinatario,"Recuperación de contraseña", "Hola "+ existe_user.getNombre() +"!, nos has solicitado restablecer tu contraseña para nuestro sistema. Ingresa:  <b>" + nueva_pwd + "</b>  para iniciar sesión");
+					iWalkerServiceImp.updateContrasenia(encryp, existe_user.getId_walker());
+					response.put("nueva", nueva_pwd);
+					response.put("successful", true);
+					response.put("message", existe_user);
+				}catch(Exception ex) {
+					
+					response.put("successful", false);
+					response.put("message", ex.getMessage());
+				}
+				
+			
+				
+			} else {
+				response.put("successful", false);
+				response.put("message", "Se inhabilitó la cuenta para: " + correo_electronico);
+			}
+
+		} else {
+			response.put("successful", false);
+			response.put("message", "El correo electrónico no existe");
+		}
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
 }

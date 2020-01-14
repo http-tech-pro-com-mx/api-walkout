@@ -3,6 +3,7 @@ package com.tech.pro.walker.api.models.dao;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,5 +22,7 @@ public interface IWalkerDao extends JpaRepository<Walker, Long> {
 	@Modifying
 	@Query("update Walker w set w.pwd =?1 where w.id_walker =?2")
 	public void updateContrasenia(String contrasenia, Long id_usuario);
+	
+	public Optional<Walker> findByEmail(String email);
 
 }
