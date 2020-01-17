@@ -125,7 +125,7 @@ public class Configuracion implements Serializable  {
 	private Date getDateCorrecta(Date f, int dias) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(f);
-	    c.add(c.DATE, dias);
+	    c.add(Calendar.DATE, dias);
 	    return c.getTime();
 	}
 	
