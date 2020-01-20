@@ -29,7 +29,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://tech-pro.fortiddns.com:888/","http://192.168.16.244:888/"));
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://tech-pro.fortiddns.com:888","http://192.168.16.244:888"));
 		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT", "OPTIONS"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders((Arrays.asList("Content-Type", "Authorization")));
