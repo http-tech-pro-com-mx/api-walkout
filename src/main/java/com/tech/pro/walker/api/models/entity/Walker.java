@@ -82,6 +82,9 @@ public class Walker implements Serializable {
 	@Column
 	private boolean estatus;
 	
+	@Column
+	private int sexo;
+	
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="Walkers_roles", joinColumns = @JoinColumn(name="id_walker")
@@ -207,6 +210,14 @@ public class Walker implements Serializable {
 	public void setSobre_mi(String sobre_mi) {
 		this.sobre_mi = sobre_mi;
 	}
+	public int getSexo() {
+		return sexo;
+	}
+	public void setSexo(int sexo) {
+		this.sexo = sexo;
+	}
+	
+	
 	
 
 }
