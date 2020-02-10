@@ -2,6 +2,7 @@ package com.tech.pro.walker.api.models.dao;
 
 import com.tech.pro.walker.api.models.entity.IP;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,5 +35,21 @@ public interface IIpDao extends JpaRepository<IP, Long>{
 	@Modifying
 	@Query("update IP i set i.QC =?2 where i.id_ip =?1")
 	public void changeStatus(Long id_ip, int estatus);
+	
+	@Modifying
+	@Query("update IP i set i.fecha_envio_campo =?2 where i.id_ip =?1")
+	public void updateFechaCampo(Long id_ip, Date dia);
+	
+	@Modifying
+	@Query("update IP i set i.fecha_cliente =?2 where i.id_ip =?1")
+	public void updateFechaCliente(Long id_ip, Date dia);
+	
+	@Modifying
+	@Query("update IP i set i.fecha_qc =?2 where i.id_ip =?1")
+	public void updateFechaQC(Long id_ip, Date dia);
+	
+	@Modifying
+	@Query("update IP i set i.fecha_shared_point =?2 where i.id_ip =?1")
+	public void updateFechaShared(Long fecha_shared_point, Date dia);
 
 }

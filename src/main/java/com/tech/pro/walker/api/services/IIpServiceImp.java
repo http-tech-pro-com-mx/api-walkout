@@ -1,5 +1,6 @@
 package com.tech.pro.walker.api.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,6 +76,36 @@ public class IIpServiceImp implements IIpService{
 	public void changeStatus(Long id_ip, int estatus) {
 		iIpDao.changeStatus(id_ip, estatus);
 	}
+
+	@Override
+	@Transactional
+	public void updateFechaCampo(Long id_ip, Date dia) {
+		iIpDao.updateFechaCampo(id_ip, dia);
+		
+	}
+
+	@Override
+	@Transactional
+	public void updateFechaCliente(Long id_ip, Date dia) {
+		// TODO Auto-generated method stub
+		iIpDao.updateFechaCliente(id_ip, dia);
+	}
+
+	@Override
+	@Transactional
+	public void updateFechaQC(Long id_ip, Date dia) {
+		// TODO Auto-generated method stub
+		iIpDao.updateFechaQC(id_ip, dia);
+	}
+
+	@Override
+	@Transactional
+	public void updateFechaShared(Long fecha_shared_point, Date dia) {
+		// TODO Auto-generated method stub
+		iIpDao.updateFechaShared(fecha_shared_point, dia);
+	}
+	
+	
 	
 	
 

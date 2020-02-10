@@ -1,5 +1,6 @@
 package com.tech.pro.walker.api.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,5 +28,14 @@ public interface IIpService {
 	public List<Object> getParticipantesByIp(Long id_ip);
 	
 	public void changeStatus(Long id_ip, int estatus);
+	
+	public void updateFechaCampo(Long id_ip, Date dia);
+	
+	public void updateFechaCliente(Long id_ip, Date dia);
+	
+	public void updateFechaQC(Long id_ip, Date dia);
+	
+	public void updateFechaShared(Long fecha_shared_point, Date dia);
+	
 	
 }
