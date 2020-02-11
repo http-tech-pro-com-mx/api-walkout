@@ -29,7 +29,7 @@ public interface IIpService {
 	
 	public void changeStatus(Long id_ip, int estatus);
 	
-	public void updateFechaCampo(Long id_ip, Date dia);
+	public void updateFechaCampo(Long id_ip, Date dia, int total_grids, boolean actualizacion, Double km_actualizados );
 	
 	public void updateFechaCliente(Long id_ip, Date dia);
 	

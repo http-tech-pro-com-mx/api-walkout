@@ -77,12 +77,7 @@ public class IIpServiceImp implements IIpService{
 		iIpDao.changeStatus(id_ip, estatus);
 	}
 
-	@Override
-	@Transactional
-	public void updateFechaCampo(Long id_ip, Date dia) {
-		iIpDao.updateFechaCampo(id_ip, dia);
-		
-	}
+	
 
 	@Override
 	@Transactional
@@ -103,6 +98,13 @@ public class IIpServiceImp implements IIpService{
 	public void updateFechaShared(Long fecha_shared_point, Date dia) {
 		// TODO Auto-generated method stub
 		iIpDao.updateFechaShared(fecha_shared_point, dia);
+	}
+
+	@Override
+	@Transactional
+	public void updateFechaCampo(Long id_ip, Date dia, int total_grids, boolean actualizacion, Double km_actualizados) {
+		iIpDao.updateFechaCampo(id_ip, dia, total_grids, actualizacion, km_actualizados);
+		
 	}
 	
 	

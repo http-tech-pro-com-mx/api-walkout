@@ -37,8 +37,8 @@ public interface IIpDao extends JpaRepository<IP, Long>{
 	public void changeStatus(Long id_ip, int estatus);
 	
 	@Modifying
-	@Query("update IP i set i.fecha_envio_campo =?2 where i.id_ip =?1")
-	public void updateFechaCampo(Long id_ip, Date dia);
+	@Query("update IP i set i.fecha_envio_campo =?2 , i.total_grids =?3, i.actualizacion =?4, i.km_actualizados =?5  where i.id_ip =?1")
+	public void updateFechaCampo(Long id_ip, Date dia, int total_grids, boolean actualizacion, Double km_actualizados );
 	
 	@Modifying
 	@Query("update IP i set i.fecha_cliente =?2 where i.id_ip =?1")

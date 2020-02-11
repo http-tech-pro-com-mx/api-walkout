@@ -127,7 +127,7 @@ public class IpController {
 
 		case 0:
 			IP.setFecha_envio_campo(dia);
-			iIpServiceImp.updateFechaCampo(IP.getId_ip(), dia);
+			iIpServiceImp.updateFechaCampo(IP.getId_ip(), dia, IP.getTotal_grids(), IP.isActualizacion(), IP.getKm_actualizados());
 			break;
 		case 1:
 			IP.setFecha_qc(dia);
