@@ -37,5 +37,11 @@ public interface IIpService {
 	
 	public void updateFechaShared(Long fecha_shared_point, Date dia);
 	
+	public List<IP> getIpSharedSemana(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
 	
+	public List<IP> getIpPoolClientSemana(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
+	
+	public List<IP> getIpOnQC(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
+	
+	public Double kmTotalShared(Long id_proyecto); 
 }

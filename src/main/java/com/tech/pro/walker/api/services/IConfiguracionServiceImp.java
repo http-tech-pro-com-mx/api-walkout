@@ -1,6 +1,7 @@
 package com.tech.pro.walker.api.services;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,15 @@ public class IConfiguracionServiceImp implements IConfiguracionService{
 	public List<Configuracion> findAllByIdProyecto(Long id_proyecto) {
 		return iConfiguracionDao.findAllByIdProyecto(id_proyecto);
 	}
+
+	@Override
+	@Transactional( readOnly = true)
+	public Configuracion getSemanaActual(Date now, Long id_proyecto) {
+		return iConfiguracionDao.getSemanaActual(now, id_proyecto);
+	}
+	
+	
+	
 	
 
 }

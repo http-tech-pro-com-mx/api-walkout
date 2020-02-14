@@ -51,5 +51,21 @@ public interface IIpDao extends JpaRepository<IP, Long>{
 	@Modifying
 	@Query("update IP i set i.fecha_shared_point =?2 where i.id_ip =?1")
 	public void updateFechaShared(Long fecha_shared_point, Date dia);
+	
+
+	@Query("from IP i where i.fecha_shared_point >=?1 and i.fecha_shared_point <=?2 and i.proyecto.id_proyecto =?3 and i.QC=3")
+	public List<IP> getIpSharedSemana(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
+
+
+	@Query("from IP i where ( i.fecha_cliente>=?1 and i.fecha_cliente<=?2 ) and i.proyecto.id_proyecto=?3 and i.QC=2")
+	public List<IP> getIpPoolClientSemana(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
+	
+
+	@Query("from IP i where ( i.fecha_qc>=?1 and i.fecha_qc<=?2 ) and i.proyecto.id_proyecto=?3 and (i.QC=1 OR  i.QC=4)")
+	public List<IP> getIpOnQC(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
+	
+
+	@Query("select sum(pies) from IP i where i.QC=3 and i.proyecto.id_proyecto=?1")
+	public Double kmTotalShared(Long id_proyecto);
 
 }

@@ -106,6 +106,32 @@ public class IIpServiceImp implements IIpService{
 		iIpDao.updateFechaCampo(id_ip, dia, total_grids, actualizacion, km_actualizados);
 		
 	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public List<IP> getIpSharedSemana(Date fecha_inicio, Date fecha_fin, Long id_proyecto) {
+		return iIpDao.getIpSharedSemana(fecha_inicio, fecha_fin, id_proyecto);
+	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public List<IP> getIpPoolClientSemana(Date fecha_inicio, Date fecha_fin, Long id_proyecto) {
+		return iIpDao.getIpPoolClientSemana(fecha_inicio, fecha_fin, id_proyecto);
+	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public List<IP> getIpOnQC(Date fecha_inicio, Date fecha_fin, Long id_proyecto) {
+		return iIpDao.getIpOnQC(fecha_inicio, fecha_fin, id_proyecto);
+	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public Double kmTotalShared(Long id_proyecto) {
+		return iIpDao.kmTotalShared(id_proyecto);
+	}
+	
+	
 	
 	
 	
