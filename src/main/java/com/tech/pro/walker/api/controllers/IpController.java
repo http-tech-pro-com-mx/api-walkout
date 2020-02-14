@@ -174,5 +174,28 @@ public class IpController {
 		response.put("participantes", all);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+	
+	//@Secured({ "ROLE_HQ", "ROLE_ADMIN", "ROLE_CONSULTA_IP" })
+	@GetMapping("get-ips-en-campo/proyecto/{id_proyecto}")
+	public ResponseEntity<?> getIpsEnCampo(@PathVariable Long id_proyecto) {
+		Map<String, Object> response = new HashMap<>();
+		List<IP> ips = iIpServiceImp.getIpsEnCampo(id_proyecto);
+		response.put("ips", ips);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+	
+	//@Secured({ "ROLE_HQ", "ROLE_ADMIN", "ROLE_CONSULTA_IP" })
+	@PostMapping("/update-fecha-asigna-camina")
+	public ResponseEntity<?> updateFechaAsignacion(@RequestBody IP ip) {
+
+		Map<String, Object> response = new HashMap<>();		
+		iIpServiceImp.updateFechaAsignacionCamina(ip.getId_ip(), ip.getFecha_asignacion_caminar());
+		
+		response.put("successful", true);
+		response.put("datos", ip);
+		response.put("message", " Se actualizó la fecha");
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
 
 }

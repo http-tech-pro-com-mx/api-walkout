@@ -67,5 +67,14 @@ public interface IIpDao extends JpaRepository<IP, Long>{
 
 	@Query("select sum(pies) from IP i where i.QC=3 and i.proyecto.id_proyecto=?1")
 	public Double kmTotalShared(Long id_proyecto);
+	
+	@Query("from IP i where  i.proyecto.id_proyecto=?1 and i.QC=0 order by ip.fecha_envio_campo desc")
+	public List<IP> getIpsEnCampo(Long id_proyecto);
+	
+	@Modifying
+	@Query("update IP i set i.fecha_asignacion_caminar =?2 where i.id_ip =?1")
+	public void updateFechaAsignacionCamina(Long id_ip, Date fecha);
+	
+	
 
 }

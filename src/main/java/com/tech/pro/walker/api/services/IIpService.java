@@ -44,4 +44,10 @@ public interface IIpService {
 	public List<IP> getIpOnQC(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
 	
 	public Double kmTotalShared(Long id_proyecto); 
+	
+	public List<IP> getIpsEnCampo(Long id_proyecto);
+	
+	public void updateFechaAsignacionCamina(Long id_ip, Date fecha);
+	
+	
 }

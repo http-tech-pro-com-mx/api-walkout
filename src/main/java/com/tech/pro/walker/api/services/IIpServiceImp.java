@@ -130,6 +130,20 @@ public class IIpServiceImp implements IIpService{
 	public Double kmTotalShared(Long id_proyecto) {
 		return iIpDao.kmTotalShared(id_proyecto);
 	}
+
+	@Override
+	@Transactional(readOnly= true)
+	public List<IP> getIpsEnCampo(Long id_proyecto) {
+		return iIpDao.getIpsEnCampo(id_proyecto);
+	}
+
+	@Override
+	@Transactional
+	public void updateFechaAsignacionCamina(Long id_ip, Date fecha) {
+		iIpDao.updateFechaAsignacionCamina(id_ip, fecha);
+	}
+	
+	
 	
 	
 	

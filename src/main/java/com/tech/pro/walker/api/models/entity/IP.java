@@ -64,6 +64,9 @@ public class IP  implements Serializable {
 	private Date fecha_shared_point;
 	
 	@Column(nullable = true)
+	private Date fecha_asignacion_caminar;
+	
+	@Column(nullable = true)
 	private int total_grids;
 	
 	@Column(columnDefinition = "boolean default false", nullable = false)
@@ -271,13 +274,14 @@ public class IP  implements Serializable {
 		this.km_actualizados = km_actualizados;
 	}
 	
+	public Date getFecha_asignacion_caminar() {
+		return fecha_asignacion_caminar;
+	}
 	
-	
-	
-	
-	
-	
-	
+	public void setFecha_asignacion_caminar(Date fecha_asignacion_caminar) {
+		this.fecha_asignacion_caminar = fecha_asignacion_caminar;
+	}
+
 	
 
 }
