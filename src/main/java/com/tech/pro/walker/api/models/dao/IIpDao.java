@@ -53,15 +53,15 @@ public interface IIpDao extends JpaRepository<IP, Long>{
 	public void updateFechaShared(Long fecha_shared_point, Date dia);
 	
 
-	@Query("from IP i where i.fecha_shared_point >=?1 and i.fecha_shared_point <=?2 and i.proyecto.id_proyecto =?3 and i.QC=3")
+	@Query("from IP i where i.fecha_shared_point >=?1 and i.fecha_shared_point <=?2 and i.proyecto.id_proyecto =?3 and i.QC=3 order by i.fecha_shared_point desc")
 	public List<IP> getIpSharedSemana(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
 
 
-	@Query("from IP i where ( i.fecha_cliente>=?1 and i.fecha_cliente<=?2 ) and i.proyecto.id_proyecto=?3 and i.QC=2")
+	@Query("from IP i where ( i.fecha_cliente>=?1 and i.fecha_cliente<=?2 ) and i.proyecto.id_proyecto=?3 and i.QC=2 order by i.fecha_cliente  desc")
 	public List<IP> getIpPoolClientSemana(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
 	
 
-	@Query("from IP i where ( i.fecha_qc>=?1 and i.fecha_qc<=?2 ) and i.proyecto.id_proyecto=?3 and (i.QC=1 OR  i.QC=4)")
+	@Query("from IP i where ( i.fecha_qc>=?1 and i.fecha_qc<=?2 ) and i.proyecto.id_proyecto=?3 and (i.QC=1 OR  i.QC=4) order by i.fecha_cliente desc")
 	public List<IP> getIpOnQC(Date fecha_inicio, Date fecha_fin, Long id_proyecto);
 	
 
